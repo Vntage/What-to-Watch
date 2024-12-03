@@ -1,0 +1,107 @@
+.my-account-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.my-account-info {
+    text-align: left;
+}
+
+.label {
+    display: flex; /* Makes label take the full width */
+    font-weight: bold; /* Optional: bold text for emphasis */
+    align-items: center;
+    margin-top: 10px; /* Space between labels */
+}
+
+.input {
+    border: none; /* Remove border for a cleaner look */
+    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    padding: 5px 0; /* Add padding for better spacing */
+    width: 100%; /* Full width for input */
+    font-size: 16px; /* Match the font size */
+    margin-left: 10px; /* Space between inputs */
+    background: transparent; /* Keep background transparent */
+    color: white;
+    outline: none; /* Remove outline on focus */
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.section {
+    flex: 1;
+    width: 500px;
+    border: 1px solid #5f5f5f;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.section-header {
+    text-align: left;
+    margin-left: 15px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    height: 250px;
+    align-items: stretch;
+}
+
+.card {
+    text-align: center;
+    width: 25%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #676767;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card .picture {
+    height: 200px;
+    background-color: #2b2b2b;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.card .label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.logout {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    font-size: 16px;   
+}
