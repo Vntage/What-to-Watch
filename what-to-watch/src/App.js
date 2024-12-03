@@ -1,25 +1,77 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Quiz from './components/Quiz';
+import MovieRecommendations from './components/MovieRecommendations';
+import MovieReview from './components/MovieReview';
 
-function App() {
+const App = () => {
+  const [activeTab, setActiveTab] = useState('Home');
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'Home':
+        return <Home />;
+      case 'About':
+        return <About />;
+      case 'MovieRecommendations':
+        return <MovieRecommendations />;
+      case 'Contact':
+        return <Contact />;
+      case 'Quiz':
+        return <Quiz />;
+      case 'MovieReview':
+        return <MovieReview />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <nav className="tabbar">
+        <button
+          className={`tab ${activeTab === 'Home' ? 'active' : ''}`}
+          onClick={() => setActiveTab('Home')}
         >
-          Learn React
-        </a>
-      </header>
+          Home
+        </button>
+        <button
+          className={`tab ${activeTab === 'About' ? 'active' : ''}`}
+          onClick={() => setActiveTab('About')}
+        >
+          About
+        </button>
+        <button
+          className={`tab ${activeTab === 'MovieRecommendations' ? 'active' : ''}`}
+          onClick={() => setActiveTab('MovieRecommendations')}
+        >
+          Movie Recommendations
+        </button>
+        <button
+          className={`tab ${activeTab === 'Contact' ? 'active' : ''}`}
+          onClick={() => setActiveTab('Contact')}
+        >
+          Contact
+        </button>
+        <button
+          className={`tab ${activeTab === 'Quiz' ? 'active' : ''}`}
+          onClick={() => setActiveTab('Quiz')}
+        >
+          Quiz
+        </button>
+        <button
+          className={`tab ${activeTab === 'MovieReview' ? 'active' : ''}`}
+          onClick={() => setActiveTab('MovieReview')}
+        >
+          Movie Review
+        </button>
+      </nav>
+      <main className="content">{renderContent()}</main>
     </div>
   );
-}
+};
 
 export default App;
