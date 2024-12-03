@@ -6,6 +6,8 @@ import Contact from './components/Contact';
 import Quiz from './components/Quiz';
 import MovieRecommendations from './components/MovieRecommendations';
 import MovieReview from './components/MovieReview';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('Home');
@@ -24,6 +26,10 @@ const App = () => {
         return <Quiz />;
       case 'MovieReview':
         return <MovieReview />;
+      case 'SignUp':
+        return <SignUp />;
+      case 'Login':
+        return <Login />
       default:
         return null;
     }
@@ -67,6 +73,18 @@ const App = () => {
           onClick={() => setActiveTab('MovieReview')}
         >
           Movie Review
+        </button>
+        <button
+          className={`tab ${activeTab === 'SignUp' ? 'active' : ''}`}
+          onClick={() => setActiveTab('SignUp')}
+        >
+          Register
+        </button>
+        <button
+          className={`tab ${activeTab === 'Login' ? 'active' : ''}`}
+          onClick={() => setActiveTab('Login')}
+        >
+          Login
         </button>
       </nav>
       <main className="content">{renderContent()}</main>

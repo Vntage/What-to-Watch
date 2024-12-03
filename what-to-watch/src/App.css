@@ -1,40 +1,127 @@
-.App {
+/* App.css */
+
+:root {
+  --primary-bg: #1a1a1a; /* Black background */
+  --primary-text: #e63946; /* Red text */
+  --secondary-bg: #333333; /* Dark gray for cards/containers */
+  --secondary-text: #ffffff; /* White text for contrast */
+  --button-bg: #e63946; /* Red buttons */
+  --button-hover-bg: #b31c2c; /* Darker red for hover */
+  --button-text: #ffffff; /* White text for buttons */
+  --border-color: #e63946; /* Red border */
+}
+
+body {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Center text alignment */
+  height: 100vh; /* Full viewport height */
+  margin: 0;
   font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-text);
+}
+
+a {
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .tabbar {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  background-color: var(--secondary-bg);
+  padding: 10px;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .tab {
-  padding: 10px 20px;
-  margin: 0 10px;
+  color: var(--primary-text);
+  background: none;
   border: none;
-  background-color: #f0f0f0;
+  padding: 10px 20px;
+  margin: 0 5px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  text-align: center;
 }
 
-.tab.active {
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
-}
-
-.tab:hover {
-  background-color: #007bff;
-  color: white;
+.tab:hover, .tab.active {
+  background-color: var(--button-bg);
+  color: var(--button-text);
 }
 
 .content {
-  font-size: 18px;
   padding: 20px;
-  border: 1px solid #ddd;
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 10px 15px;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+/* Forms */
+.form-input,
+.form-textarea {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #999;
+}
+
+/* Stars for Ratings */
+.star {
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.star.selected {
+  color: var(--button-bg);
+}
+
+/* Review Cards */
+.review-card {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.review-card h4 {
+  color: var(--primary-text);
+}
+
+.reviews-section h3 {
+  color: var(--primary-text);
 }
