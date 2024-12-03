@@ -1,0 +1,106 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+.quiz-content {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    max-width: 600px;
+}
+
+.quiz-content h1 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.quiz-content h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.quiz-content input[type='radio'] {
+    margin-right: 8px;
+}
+
+.quiz-content label {
+    font-size: 1em;
+    margin-right: 15px;
+}
+
+.quiz-content select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    background-color: #f0f8ff;
+    color: #333333;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.quiz-content select:hover {
+    background-color: #e0f0ff;
+    transform: scale(1.02);
+}
+
+.quiz-content select:focus {
+    background-color: #d8e8ff;
+    box-shadow: 0 0 0 3px #b0d0ff;
+}
+
+.quiz-content select::-ms-expand {
+    display: none;
+}
+
+.quiz-content select::after {
+    content: '▼';
+    font-size: 1.2em;
+    color: #666666;
+    position: absolute;
+    right: 15px;
+    pointer-events: none;
+}
+
+.quiz-content .slider-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.quiz-content .slider {
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quiz-content .button-container {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.quiz-content button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.quiz-content button:hover {
+    background-color: #b3b3b3;
+}
+
+.checkbox-container div {
+    margin-bottom: 8px; /* Add space between checkboxes */
+}
