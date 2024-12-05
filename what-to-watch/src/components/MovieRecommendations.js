@@ -1,11 +1,11 @@
 import React,{useState} from 'react';
-//import Stream from './projectAPI';
 import "bootstrap/dist/css/bootstrap.css";
 import {Container, Row, Col,Button} from "react-bootstrap";
 import './movie.css';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+
 export default function App() {
   const [answers, setAnswers] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(0); 
