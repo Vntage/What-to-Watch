@@ -71,9 +71,9 @@ export default function App() {
 
     // example until API works
     if (streamingService === 'Netflix' && genre === 'Action') {
-      return 'Check out "Extraction" on Netflix.';
+      return 'Check out "Extraction" on Netflix!';
     } else if (streamingService === 'Disney+' && genre === 'Family') {
-      return 'You might enjoy "Encanto" on Disney+.';
+      return 'You might enjoy "Encanto" on Disney+!';
     }
     return 'No recommendation found, please try again with different filters.';
   };
@@ -270,6 +270,7 @@ export default function App() {
             <div className='show2'>
             <h1>Movie 2</h1><br></br>
               <p>Recommendation: {getRecommendation()}</p>
+              <br></br>
               <Button variant="primary" onClick={() => window.location.reload()}>
                   Save to Watch Later
               </Button>
