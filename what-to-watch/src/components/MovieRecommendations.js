@@ -198,10 +198,6 @@ export default function App() {
     <Button variant="primary" onClick={() => window.location.reload()}>
       Add filters
     </Button>
-    <p><br></br></p>
-    <Button variant="primary" onClick={() => window.location.reload()}>
-      Surprise Me!
-    </Button>
     </div>
 
       <div className="rightChunk">
@@ -265,9 +261,6 @@ export default function App() {
           <h2>Your Recommendations</h2>
             <div className='show1'>
               <h1>Movie 1</h1><br></br>
-              <Button variant="primary" onClick={() => window.location.reload()}>
-                  Watch Now
-              </Button> 
               <p>Recommendation: {getRecommendation()}</p>
               <Button variant="primary" onClick={() => window.location.reload()}>
                   Save to Watch Later
@@ -276,11 +269,17 @@ export default function App() {
             
             <div className='show2'>
             <h1>Movie 2</h1><br></br>
-              <h6>2</h6>
+              <p>Recommendation: {getRecommendation()}</p>
+              <Button variant="primary" onClick={() => window.location.reload()}>
+                  Save to Watch Later
+              </Button>
             </div> 
             <div className='show3'>
             <h1>Movie 3</h1><br></br>
-              <h6>3</h6>
+              <p>Recommendation: {getRecommendation()}</p>
+              <Button variant="primary" onClick={() => window.location.reload()}>
+                  Save to Watch Later
+              </Button>
             </div> 
         </div>
       </div>
