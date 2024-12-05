@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './SubscriptionManager.css';
 
 // Predefined plans
@@ -12,30 +13,50 @@ const predefinedPlans = [
 
 const SubscriptionManager = () => {
   const [subscriptions, setSubscriptions] = useState([]);
+  const [userId] = useState('123'); // Replace with dynamic user ID if available
+  const [error, setError] = useState(null);
 
-  const handleAddSubscription = (plan) => {
-    
-    // Check if the plan is already added
-    if (subscriptions.find((sub) => sub.id === plan.id)) {
-      alert(`${plan.name} is already in your subscriptions.`);
-      return;
+  // Fetch subscriptions from the backend
+  useEffect(() => {
+    const fetchSubscriptions = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/userId');
+        setSubscriptions(response.data);
+      } catch (err) {
+        console.error('Error fetching subscriptions:', err);
+        setError('Failed to load subscriptions. Please try again later.');
+      }
+    };
+    fetchSubscriptions();
+  }, [userId]);
+
+  // Add a new subscription
+  const handleAddSubscription = async (plan) => {
+    try {
+      const response = await axios.post('http://localhost:5000/subscriptions', {
+        ...plan,
+        userId,
+      });
+      setSubscriptions([...subscriptions, response.data]);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to add subscription');
     }
-
-    setSubscriptions([...subscriptions, plan]);
   };
 
-  const handleCancelSubscription = (id) => {
-    const updatedSubscriptions = subscriptions.filter((sub) => sub.id !== id);
-    setSubscriptions(updatedSubscriptions);
+  // Remove a subscription
+  const handleCancelSubscription = async (id) => {
+    try {
+      await axios.delete('http://localhost:5000/api/subscriptions/id');
+      setSubscriptions(subscriptions.filter((sub) => sub._id !== id));
+    } catch (err) {
+      console.error('Error canceling subscription:', err);
+      alert('Failed to cancel subscription.');
+    }
   };
 
-
-  // Calculate total monthly cost
+  // Calculate total and average costs
   const totalCost = subscriptions.reduce((sum, sub) => sum + sub.cost, 0);
-
-  // Calculate average cost per service
   const averageCost = subscriptions.length > 0 ? (totalCost / subscriptions.length).toFixed(2) : 0;
-
 
   return (
     <div className="subscription-manager-container">
@@ -62,12 +83,12 @@ const SubscriptionManager = () => {
         <h3>My Subscriptions</h3>
         {subscriptions.length > 0 ? (
           subscriptions.map((sub) => (
-            <div key={sub.id} className="subscription-card">
+            <div key={sub._id} className="subscription-card">
               <h4>{sub.name}</h4>
               <p>Cost: ${sub.cost}</p>
               <p>Renewal: {sub.renewal}</p>
               <button
-                onClick={() => handleCancelSubscription(sub.id)}
+                onClick={() => handleCancelSubscription(sub._id)}
                 className="cancel-btn"
               >
                 Cancel Subscription
@@ -84,6 +105,8 @@ const SubscriptionManager = () => {
         <p>Total Monthly Cost: <strong>${totalCost.toFixed(2)}</strong></p>
         <p>Average Cost per Service: <strong>${averageCost}</strong></p>
       </div>
+
+      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };
