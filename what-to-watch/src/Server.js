@@ -47,6 +47,52 @@ app.post('/reviews', async (req, res) => {
   }
 });
 
+// Define Schema and Model
+const subscriptionSchema = new mongoose.Schema({
+    name: String,
+    cost: Number,
+    renewal: String,
+    userId: String, // To associate subscriptions with specific users
+  });
+  
+  const Subscription = mongoose.model('Subscription', subscriptionSchema);
+  
+  // API Endpoints
+  
+  // Fetch all subscriptions for a user
+  app.get('/userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+      const subscriptions = await Subscription.find({ userId });
+      res.json(subscriptions);
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to fetch subscriptions' });
+    }
+  });
+  
+  // Add a new subscription
+  app.post('/subscriptions', async (req, res) => {
+    const { name, cost, renewal, userId } = req.body;
+    try {
+      const newSubscription = new Subscription({ name, cost, renewal, userId });
+      await newSubscription.save();
+      res.status(201).json(newSubscription);
+    } catch (err) {
+      res.status(400).json({ error: 'Failed to add subscription' });
+    }
+  });
+  
+  // Delete a subscription by ID
+  app.delete('/id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      await Subscription.findByIdAndDelete(id);
+      res.json({ message: 'Subscription deleted successfully' });
+    } catch (err) {
+      res.status(500).json({ error: 'Failed to delete subscription' });
+    }
+  });
+  
 // Start Server
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
