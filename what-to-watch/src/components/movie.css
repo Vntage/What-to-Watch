@@ -20,13 +20,12 @@
   
   .quiz{
     text-align: center;
-    height:8%;
-    padding-left: 20vh;
+    height:15%;
     padding-top: 2%;
   }
   
   .threeShows {
-    height: 92%;
+    height: 85%;
     background-color: #872415;
     color: #f8f5dd;
     padding-top: 5%;
