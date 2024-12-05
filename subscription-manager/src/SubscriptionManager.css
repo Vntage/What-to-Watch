@@ -1,0 +1,53 @@
+.subscription-manager-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .subscription-form {
+    margin-bottom: 20px;
+  }
+  
+  .form-input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .submit-btn, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .submit-btn {
+    background-color: #4CAF50;
+  }
+  
+  .cancel-btn {
+    background-color: #f44336;
+    margin-top: 10px;
+  }
+  
+  .subscriptions-section {
+    margin-top: 20px;
+  }
+  
+  .subscription-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .subscription-card h4 {
+    margin: 0;
+  }
+  
+  .cancel-btn:hover, .submit-btn:hover {
+    opacity: 0.8;
+  }
+  
