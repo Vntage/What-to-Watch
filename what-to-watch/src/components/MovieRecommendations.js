@@ -232,10 +232,6 @@ export default function App() {
                   <Button variant="primary" onClick={() => window.location.reload()}>
                     Refresh Recommendations
                   </Button> 
-                  <p><br></br><br></br></p>
-                  <Button variant="primary" onClick={() => window.location.reload()}>
-                    Retake The Quiz
-                  </Button>
                 </div>
               ) : (
                 <div className ="quiz">
@@ -282,6 +278,9 @@ export default function App() {
                   Save to Watch Later
               </Button>
             </div> 
+            <Button variant="primary" onClick={() => window.location.reload()}>
+                Retake The Quiz
+            </Button>
         </div>
       </div>
     </div>
