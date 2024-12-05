@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './MovieReview.css';
 
 const MovieReview = () => {
@@ -7,14 +8,33 @@ const MovieReview = () => {
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
 
-  const handleSubmit = (e) => {
+  // Fetch reviews from backend
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/reviews');
+        setReviews(response.data);
+      } catch (err) {
+        console.error('Error fetching reviews:', err);
+      }
+    };
+    fetchReviews();
+  }, []);
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (movieName && review && rating) {
       const newReview = { movieName, review, rating };
-      setReviews([...reviews, newReview]);
-      setMovieName('');
-      setReview('');
-      setRating(0);
+      try {
+        const response = await axios.post('http://localhost:5000/reviews', newReview);
+        setReviews([...reviews, response.data]);
+        setMovieName('');
+        setReview('');
+        setRating(0);
+      } catch (err) {
+        console.error('Error submitting review:', err);
+      }
     } else {
       alert('Please fill in all fields and give a rating!');
     }
