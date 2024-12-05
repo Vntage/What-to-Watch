@@ -2,9 +2,6 @@ import React,{useState} from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import {Container, Row, Col,Button} from "react-bootstrap";
 import './movie.css';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function App() {
   const [answers, setAnswers] = useState({});
@@ -205,26 +202,7 @@ export default function App() {
     </div>
 
       <div className="rightChunk">
-        <div className='navigation'>
-          <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-              <Navbar.Brand href="#home">What to Watch</Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                  <NavDropdown title="Home" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Signup</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Login</NavDropdown.Item>
-                  </NavDropdown>
-                  <Nav.Link href="#home">Reviews</Nav.Link>
-                  <Nav.Link href="#link">Quizzes</Nav.Link>
-                  <Nav.Link href="#link">Your Account</Nav.Link>
-                  <Nav.Link href="#link">Track Your Services</Nav.Link>
-                </Nav>
-              </Navbar.Collapse>
-            </Container>
-          </Navbar>
-        </div>
+        
         <div className='quiz'>
         <Container>
           <Row className="quiz">
