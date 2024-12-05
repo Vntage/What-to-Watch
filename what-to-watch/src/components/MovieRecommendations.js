@@ -112,7 +112,7 @@ export default function App() {
         <input
           type="checkbox"
           name="item3"
-          checked={checkedItems.item2 || false}
+          checked={checkedItems.item3 || false}
           onChange={handleCheckboxChange}/>
         1971-1990
       </label><br></br>
@@ -121,7 +121,7 @@ export default function App() {
         <input
           type="checkbox"
           name="item4"
-          checked={checkedItems.item2 || false}
+          checked={checkedItems.item4 || false}
           onChange={handleCheckboxChange}/>
         1991-2005
       </label><br></br>
@@ -130,7 +130,7 @@ export default function App() {
         <input
           type="checkbox"
           name="item5"
-          checked={checkedItems.item2 || false}
+          checked={checkedItems.item5 || false}
           onChange={handleCheckboxChange}/>
         2006-2012
       </label><br></br>
@@ -138,8 +138,8 @@ export default function App() {
       <label>
         <input
           type="checkbox"
-          name="item3"
-          checked={checkedItems.item2 || false}
+          name="item6"
+          checked={checkedItems.item6 || false}
           onChange={handleCheckboxChange}/>
         2013-today
       </label><br></br><br></br>
