@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import './SignUp.css';
 import Login from './Login'; // Import Login component
+import axios from 'axios';
 
 const SignUp = () => {
   const [activeTab, setActiveTab] = useState('SignUp');
@@ -8,6 +10,17 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const navigate = useNavigate();
+
+    const handleSignUp = (event, firstName, lastName, username, password) => {
+        axios.post('http://localhost:9000/createUser', { firstName, lastName, username, password })
+            .then((res) => {
+                alert('Signup Succesful!');
+                navigate('/Login');
+            })
+            .catch((err) => alert('Error in Signing Up'))
+    }
 
   const renderContent = () => {
     if (activeTab === 'Login') {
@@ -46,7 +59,7 @@ const SignUp = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="form-input"
           />
-          <button type="submit" className="signup-btn">
+          <button type="submit" className="signup-btn" onClick={(event) => handleSignUp(event, username, email, password)}>
             Sign Up
           </button>
         </form>
