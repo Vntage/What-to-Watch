@@ -108,7 +108,7 @@ const subscriptionSchema = new mongoose.Schema({
 const Subscription = mongoose.model('Subscription', subscriptionSchema);
 
 // Subscription API Endpoints
-app.get('/subscriptions/:userId', async (req, res) => {
+app.get('/userId', async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -131,7 +131,7 @@ app.post('/subscriptions', async (req, res) => {
   }
 });
 
-app.delete('/subscriptions/:id', async (req, res) => {
+app.delete('/id', async (req, res) => {
   const { id } = req.params;
 
   try {
