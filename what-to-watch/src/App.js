@@ -10,6 +10,8 @@ import MovieReview from './components/MovieReview';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import MyAccount from './components/MyAccount';
+import SubscriptionManager from './components/SubscriptionManager';
+
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('Login');
@@ -30,8 +32,12 @@ const App = () => {
         return <MovieReview />;
       case 'MyAccount' :
         return <MyAccount />;
+      case 'SubscriptionManager' :
+        return <SubscriptionManager />;
       case 'Login' :
         return <Login />;
+      case 'SignUp' :
+        return <SignUp />;
       default:
         return null;
     }
@@ -80,6 +86,11 @@ const App = () => {
           <button 
             className={`tab ${activeTab === 'MyAccount' ? 'active' : ''}`}
             onClick={() => setActiveTab('MyAccount')}>
+              My Account
+          </button>
+          <button 
+            className={`tab ${activeTab === 'SubscriptionManager' ? 'active' : ''}`}
+            onClick={() => setActiveTab('SubscriptionManager')}>
               My Account
           </button>
         </nav>
