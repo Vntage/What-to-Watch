@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import {Container, Row, Col,Button} from "react-bootstrap";
 import './movie.css';
@@ -8,6 +8,14 @@ export default function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0); 
   const [showResults, setShowResults] = useState(false); 
   const [score, setScore] = useState(0); 
+  const [isAdmin,setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const userRole = localStorage.getItem("userRole");
+    if (userRole === "admin") {
+      setIsAdmin(true);
+    }
+  }, []);
 
   const questions = [
     {
@@ -81,6 +89,11 @@ export default function App() {
     const { name, checked } = event.target;
     setCheckedItems({ ...checkedItems, [name]: checked });
   };
+
+  const reportWrongInfo = () => {
+    alert("The information has been reported as incorrect.")
+    // add api request here
+  }
 
   return (
     <div className="fullScreen">
@@ -218,6 +231,11 @@ export default function App() {
                   <Button variant="primary" onClick={() => window.location.reload()}>
                     Retake The Quiz
                   </Button>
+                  {isAdmin && (
+                    <Button variant="danger" onClick={reportWrongInfo}>
+                      Report Wrong Information
+                    </Button>
+                  )}
                 </div>
               ) : (
                 <div className ="quiz">

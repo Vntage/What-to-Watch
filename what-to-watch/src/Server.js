@@ -9,6 +9,15 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+const UserSchema = new mongoose.Schema({
+  username: String,
+  email: String,
+  password: String,
+  role: { type: String, default: 'user'} //will default to user role, but can be changed in mongo to 'admin'
+});
+
+const User = mongoose.model('User', UserSchema);
+
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://WhatToWatch:WhatToWatch@whattowatch.4lvtu.mongodb.net/', {
   useNewUrlParser: true,
@@ -20,33 +29,31 @@ mongoose.connect('mongodb+srv://WhatToWatch:WhatToWatch@whattowatch.4lvtu.mongod
 // Login Route
 app.get('/getUser', async (req, res) => {
   console.log(`SERVER: GET USER REQ BODY: ${req.query}`)
-  const username = req.query.username
+  const email = req.query.email
   const password = req.query.password
+
   try {
-    const user = await User.findOne({ username, password })
-    res.send(user)
-  }
-  catch (error) {
+    const user = await User.findOne({ email, password });
+    if (!user) {
+      return res.status(404).json({ error: 'Invalid email or password' });
+    }
+    res.json({
+      _id: user._id,
+      role: user.role,
+    });
+  } catch (error) {
     res.status(500).send(error)
   }
 })
 
-const UserSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  username: String,
-  password: String
-});
-
 // Signup Route
 app.post('/createUser', async (req, res) => {
-  console.log(`SERVER: CREATE USER REQ BODY: ${req.body.username} ${req.body.firstName} ${req.body.lastName}`)
-  const un = req.body.username
-  const password = req.body.password
+  console.log(`SERVER: CREATE USER REQ BODY: ${req.body.username} ${req.body.email} ${req.body.password}`)
+  const { email, password} = req.body
 
   try {
     //Check if username already exists in database
-    User.exists({ username: un }).then(result => {
+    User.exists({ email }).then(result => {
       if (Object.is(result, null)) {
         const user = new User({
           ...req.body,
@@ -57,12 +64,12 @@ app.post('/createUser', async (req, res) => {
         res.send(user)
       }
       else {
-        console.log("Username already exists")
-        res.status(500).send("Username already exists")
+        console.log("An account with that email already exists")
+        res.status(500).send("An account with that email already exists")
       }
-    })
+    })    
   } catch (err) {
-    res.status(500).send(error);
+    res.status(500).send(err);
   }
 });
 
@@ -110,7 +117,7 @@ const Subscription = mongoose.model('Subscription', subscriptionSchema);
 
 // Fetch all subscriptions for a user
 app.get('/userId', async (req, res) => {
-  const { userId } = req.params;
+  const { userId } = req.query;
   try {
     const subscriptions = await Subscription.find({ userId });
     res.json(subscriptions);
@@ -143,5 +150,5 @@ app.delete('/id', async (req, res) => {
 });
 
 // Start Server
-const PORT = 5000;
+const PORT = 9000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

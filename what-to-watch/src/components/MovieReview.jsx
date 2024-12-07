@@ -7,18 +7,24 @@ const MovieReview = () => {
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // Fetch reviews from backend
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/reviews');
+        const response = await axios.get('http://localhost:9000/reviews');
         setReviews(response.data);
       } catch (err) {
         console.error('Error fetching reviews:', err);
       }
     };
     fetchReviews();
+
+    const userRole = localStorage.getItem('userRole');
+    if(userRole === 'admin') {
+      setIsAdmin(true);
+    }
   }, []);
 
   // Handle form submission
@@ -39,6 +45,11 @@ const MovieReview = () => {
       alert('Please fill in all fields and give a rating!');
     }
   };
+
+  const handleReport = (reviewId) => {
+    alert(`Report review with ID: ${reviewId}`)
+    // add api request here for report handling
+  }
 
   return (
     <div className="movie-review-container">
@@ -86,6 +97,9 @@ const MovieReview = () => {
                   <span key={i} className="star">★</span>
                 ))}
               </div>
+              {isAdmin && (
+                <button onClick={() => handleReport(item._id)}>Report</button>
+              )}
             </div>
           ))
         ) : (
