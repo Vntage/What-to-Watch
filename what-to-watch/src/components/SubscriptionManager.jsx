@@ -46,7 +46,7 @@ const SubscriptionManager = () => {
   // Remove a subscription
   const handleCancelSubscription = async (id) => {
     try {
-      await axios.delete('http://localhost:5000/api/subscriptions/id');
+      await axios.delete('http://localhost:5000/id');
       setSubscriptions(subscriptions.filter((sub) => sub._id !== id));
     } catch (err) {
       console.error('Error canceling subscription:', err);
