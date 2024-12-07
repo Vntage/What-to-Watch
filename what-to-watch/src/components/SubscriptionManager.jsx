@@ -62,51 +62,72 @@ const SubscriptionManager = () => {
     <div className="subscription-manager-container">
       <h2>Manage Streaming Subscriptions</h2>
 
-      <div className="available-plans">
-        <h3>Available Plans</h3>
-        {predefinedPlans.map((plan) => (
-          <div key={plan.id} className="plan-card">
-            <h4>{plan.name}</h4>
-            <p>Cost: ${plan.cost}</p>
-            <p>Renewal: {plan.renewal}</p>
-            <button
-              onClick={() => handleAddSubscription(plan)}
-              className="add-btn"
-            >
-              Add to My Subscriptions
-            </button>
-          </div>
-        ))}
-      </div>
+      {/* Table for Available Services */}
+      <table className="services-table">
+        <thead>
+          <tr>
+            <th>Service Name</th>
+            <th>Cost</th>
+            <th>Renewal</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {predefinedPlans.map((plan) => (
+            <tr key={plan.id}>
+              <td>{plan.name}</td>
+              <td>${plan.cost.toFixed(2)}</td>
+              <td>{plan.renewal}</td>
+              <td>
+                <button
+                  className="add-btn"
+                  onClick={() => handleAddSubscription(plan)}
+                >
+                  Add
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
+      {/* Subscribed Services */}
       <div className="subscriptions-section">
         <h3>My Subscriptions</h3>
         {subscriptions.length > 0 ? (
-          subscriptions.map((sub) => (
-            <div key={sub._id} className="subscription-card">
-              <h4>{sub.name}</h4>
-              <p>Cost: ${sub.cost}</p>
-              <p>Renewal: {sub.renewal}</p>
-              <button
-                onClick={() => handleCancelSubscription(sub._id)}
-                className="cancel-btn"
-              >
-                Cancel Subscription
-              </button>
-            </div>
-          ))
+          <table className="services-table">
+            <thead>
+              <tr>
+                <th>Service Name</th>
+                <th>Cost</th>
+                <th>Renewal</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subscriptions.map((sub) => (
+                <tr key={sub._id}>
+                  <td>{sub.name}</td>
+                  <td>${sub.cost.toFixed(2)}</td>
+                  <td>{sub.renewal}</td>
+                  <td>
+                    <button
+                      className="cancel-btn"
+                      onClick={() => handleCancelSubscription(sub._id)}
+                    >
+                      Cancel Subscription
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
           <p>No active subscriptions. Add one to get started!</p>
         )}
+        <h3>Total Monthly Cost: ${totalCost.toFixed(2)}</h3>
+        <h3>Average Subscription Cost: ${averageCost}</h3>
       </div>
-
-      <div className="expense-tracker">
-        <h3>Expense Summary</h3>
-        <p>Total Monthly Cost: <strong>${totalCost.toFixed(2)}</strong></p>
-        <p>Average Cost per Service: <strong>${averageCost}</strong></p>
-      </div>
-
-      {error && <p className="error-message">{error}</p>}
     </div>
   );
 };
