@@ -91,7 +91,7 @@ const App = () => {
           <button 
             className={`tab ${activeTab === 'SubscriptionManager' ? 'active' : ''}`}
             onClick={() => setActiveTab('SubscriptionManager')}>
-              My Account
+              Subscription Manager
           </button>
         </nav>
         <main className="content">{renderContent()}</main>

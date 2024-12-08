@@ -1,8 +1,14 @@
 .subscription-manager-container {
+    max-width: 1200px;
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0 auto;
+    padding: 20px;
   }
-  
+
+.services-table {
+  font-size: 24px;
+}
+
   .subscription-form {
     margin-bottom: 20px;
   }

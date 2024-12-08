@@ -20,22 +20,22 @@
 }
 
 .label {
-    display: flex; /* Makes label take the full width */
-    font-weight: bold; /* Optional: bold text for emphasis */
+    display: flex; 
+    font-weight: bold; 
     align-items: center;
-    margin-top: 10px; /* Space between labels */
+    margin-top: 10px; 
 }
 
 .input {
-    border: none; /* Remove border for a cleaner look */
-    border-bottom: 1px solid #ccc; /* Add a bottom border */
-    padding: 5px 0; /* Add padding for better spacing */
-    width: 100%; /* Full width for input */
-    font-size: 16px; /* Match the font size */
-    margin-left: 10px; /* Space between inputs */
-    background: transparent; /* Keep background transparent */
+    border: none; 
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+    width: 100%; 
+    font-size: 16px; 
+    margin-left: 10px; 
+    background: transparent; 
     color: white;
-    outline: none; /* Remove outline on focus */
+    outline: none; 
 }
 
 .content {
