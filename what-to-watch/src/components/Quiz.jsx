@@ -63,7 +63,7 @@ const StreamingQuiz = () => {
                 genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
                 budgetRange: [10, 22],
                 languages: ['English', 'French', 'Hindi'],
-                ads: false,
+                ads: true,
                 watch : ['both','movies','tvShows']
             },
             {
