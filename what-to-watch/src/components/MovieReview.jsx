@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MovieReview.css';
+import * as streamingAvailability from "../index";
 
 const MovieReview = () => {
   const [movieName, setMovieName] = useState('');
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   // Fetch reviews from backend
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('http://localhost:9000/reviews');
+        const response = await axios.get('http://localhost9000/reviews');
         setReviews(response.data);
       } catch (err) {
         console.error('Error fetching reviews:', err);
       }
     };
     fetchReviews();
-
-    const userRole = localStorage.getItem('userRole');
-    if(userRole === 'admin') {
-      setIsAdmin(true);
-    }
   }, []);
 
   // Handle form submission
@@ -33,7 +29,7 @@ const MovieReview = () => {
     if (movieName && review && rating) {
       const newReview = { movieName, review, rating };
       try {
-        const response = await axios.post('http://localhost:5000/reviews', newReview);
+        const response = await axios.post('http://localhost:9000/reviews', newReview);
         setReviews([...reviews, response.data]);
         setMovieName('');
         setReview('');
@@ -46,10 +42,13 @@ const MovieReview = () => {
     }
   };
 
-  const handleReport = (reviewId) => {
-    alert(`Report review with ID: ${reviewId}`)
-    // add api request here for report handling
-  }
+  useEffect(() => {
+    // Filter movies when the search term changes
+    const results = streamingAvailability.searchResult.shows.filter((movie) =>
+      movie.title.toLowerCase().includes(movieName.toLowerCase())
+    );
+    setFilteredMovies(results);
+  }, [movieName, streamingAvailability.searchResult.shows]);
 
   return (
     <div className="movie-review-container">
@@ -80,13 +79,33 @@ const MovieReview = () => {
             </span>
           ))}
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-btn">
           Submit Review
         </button>
       </form>
-
+      <div>
+              {filteredMovies.length > 0 ? (
+              filteredMovies.map((movie, index) => (
+            <div
+              key={index}
+              style={{
+                border: '1px solid #ccc',
+                padding: '10px',
+                marginBottom: '10px',
+                borderRadius: '5px',
+              }}
+            >
+              <h3>{movie.title} on IMDB</h3>
+              <p><strong>Rating:</strong> {movie.rating}</p>
+              <p><strong>Overview:</strong> {movie.overview}</p>
+            </div>
+          ))
+        ) : (
+          <p>No movies found</p>
+        )}
+            </div>
       <div className="reviews-section">
-        <h3>All Reviews</h3>
+        <h3>All User Reviews</h3>
         {reviews.length > 0 ? (
           reviews.map((item, index) => (
             <div key={index} className="review-card">
@@ -97,9 +116,6 @@ const MovieReview = () => {
                   <span key={i} className="star">★</span>
                 ))}
               </div>
-              {isAdmin && (
-                <button onClick={() => handleReport(item._id)}>Report</button>
-              )}
             </div>
           ))
         ) : (
