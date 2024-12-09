@@ -1,11 +1,10 @@
 import { React, useState } from 'react';
-//import {Link, useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Uncomment to use navigation
 import './MyAccount.css';
 
 const MyAccount = () => {
-    //const navigate = useNavigate();
-    
-    const[isEditing, setIsEditing] = useState(false);
+    const navigate = useNavigate();
+    const [isEditing, setIsEditing] = useState(false);
 
     const [user_info, setUserInfo] = useState({
         username: 'temp_user',
@@ -13,23 +12,25 @@ const MyAccount = () => {
         email: 'temp_user@email.com'
     });
 
-    const handleEditClick = (e) => {
+    const handleEditClick = () => {
         setIsEditing(!isEditing);
-    }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserInfo(prevState=> ({
+        setUserInfo((prevState) => ({
             ...prevState,
             [name]: value
         }));
     };
-//add "onClick={handleLogout" to logout-button
-    // const handleLogout = (e) => {
-    //     e.preventDefault()
-    //     //localStorage.clear()
-    //     navigate('/Login')
-    // }
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        // Clear session data or authentication tokens
+        localStorage.clear(); // Example: Clearing all local storage data
+        // Redirect user to the login page
+        navigate('/Login');
+    };
 
     return (
         <div className="my-account-container">
@@ -74,7 +75,8 @@ const MyAccount = () => {
                                 className="input"
                             />
                         </label>
-                    </>) : (
+                    </>
+                ) : (
                     <>
                         <p>Username: {user_info.username}</p>
                         <p>Password: {user_info.password}</p>
@@ -87,7 +89,6 @@ const MyAccount = () => {
                     <div className="section-header">
                         <h2>Favorites</h2>
                     </div>
-                    
                     <div className="card-container">
                         <div className="card">
                             <div className="picture">Picture</div>
@@ -107,7 +108,6 @@ const MyAccount = () => {
                     <div className="section-header">
                         <h2>Watch History</h2>
                     </div>
-                    
                     <div className="card-container">
                         <div className="card">
                             <div className="picture">Picture</div>
@@ -125,12 +125,12 @@ const MyAccount = () => {
                 </div>
             </div>
             <div className="logout">
-                <button className="logout-button">
+                <button className="logout-button" onClick={handleLogout}>
                     Logout
                 </button>
             </div>
         </div>
-    )
+    );
 };
 
 export default MyAccount;
