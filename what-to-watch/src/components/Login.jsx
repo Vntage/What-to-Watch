@@ -57,7 +57,7 @@ const Login = () => {
         </form>
         <p>
           Don't have an account?{' '}
-          <a onClick={() => setActiveTab('SignUp')}>Sign Up</a>
+          <a> <Link to="/SignUp">Sign Up</Link></a>
         </p>
       </div>
     );

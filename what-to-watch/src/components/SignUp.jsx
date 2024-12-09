@@ -16,7 +16,7 @@ const SignUp = () => {
 
     if (!username || !email || !password || !confirmPassword) {
       alert('Please fill in all fields.');
-      return
+      return;
     }
 
     if (password !== confirmPassword) {
@@ -30,10 +30,10 @@ const SignUp = () => {
       password
     })
       .then((res) => {
-        navigate('/Login');
-        alert('Signup Succesful!');
+        alert('Signup Successful!');
+        navigate('/login');  // Redirect to login page after successful sign-up
       })
-      .catch((err) => alert('Error in Signing Up'))
+      .catch((err) => alert('Error in Signing Up'));
   }
 
   return (
@@ -69,7 +69,7 @@ const SignUp = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="form-input"
           />
-          <button type="submit" className="signup-btn" >
+          <button type="submit" className="signup-btn">
             Sign Up
           </button>
         </form>
@@ -78,6 +78,5 @@ const SignUp = () => {
     </main>
   );
 };
-
 
 export default SignUp;
