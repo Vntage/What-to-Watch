@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SubscriptionManager.css';
 
@@ -46,7 +46,7 @@ const SubscriptionManager = () => {
   // Remove a subscription
   const handleCancelSubscription = async (id) => {
     try {
-      await axios.delete('http://localhost:5000/id');
+      await axios.delete('http://localhost:5000/api/subscriptions/id');
       setSubscriptions(subscriptions.filter((sub) => sub._id !== id));
     } catch (err) {
       console.error('Error canceling subscription:', err);
@@ -80,7 +80,7 @@ const SubscriptionManager = () => {
               <td>{plan.renewal}</td>
               <td>
                 <button
-                  className="add-btn"
+                  className="add-button"
                   onClick={() => handleAddSubscription(plan)}
                 >
                   Add
@@ -112,7 +112,7 @@ const SubscriptionManager = () => {
                   <td>{sub.renewal}</td>
                   <td>
                     <button
-                      className="cancel-btn"
+                      className="cancel-button"
                       onClick={() => handleCancelSubscription(sub._id)}
                     >
                       Cancel Subscription

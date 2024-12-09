@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';  // Import BrowserRouter
+import React from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import About from './components/About';
@@ -12,91 +12,64 @@ import Login from './components/Login';
 import MyAccount from './components/MyAccount';
 import SubscriptionManager from './components/SubscriptionManager';
 
-
 const App = () => {
-  const [activeTab, setActiveTab] = useState('Login');
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <NavBar />
+        <main className="content">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/SignUp" element={<SignUp />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/Contact" element={<Contact />} />
+            <Route path="/Quiz" element={<Quiz />} />
+            <Route path="/MovieRecommendations" element={<MovieRecommendations />} />
+            <Route path="/MovieReview" element={<MovieReview />} />
+            <Route path="/MyAccount" element={<MyAccount />} />
+            <Route path ="/SubscriptionManager" element={<SubscriptionManager />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
+  );
+};
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'Home':
-        return <Home />;
-      case 'About':
-        return <About />;
-      case 'MovieRecommendations':
-        return <MovieRecommendations />;
-      case 'Contact':
-        return <Contact />;
-      case 'Quiz':
-        return <Quiz />;
-      case 'MovieReview':
-        return <MovieReview />;
-      case 'MyAccount' :
-        return <MyAccount />;
-      case 'SubscriptionManager' :
-        return <SubscriptionManager />;
-      case 'Login' :
-        return <Login />;
-      case 'SignUp' :
-        return <SignUp />;
-      default:
-        return null;
-    }
-  };
+const NavBar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const hideNavBar = location.pathname === '/Login' || location.pathname === '/SignUp';
+
+  if(hideNavBar) {
+    return null;
+  }
+
+  const tabs = [
+    { name: 'Home', path: '/Home' },
+    { name: 'About', path: '/About' },
+    { name: 'Movie Recommendations', path: '/MovieRecommendations' },
+    { name: 'Contact', path: '/Contact' },
+    { name: 'Quiz', path: '/Quiz' },
+    { name: 'Movie Review', path: '/MovieReview' },
+    { name: 'My Account', path: '/MyAccount' },
+    { name: 'Manage Subscriptions', path: '/SubscriptionManager'}
+  ];
 
   return (
-    <BrowserRouter>  {/* Wrap the app with BrowserRouter */}
-      <div className="App">
-        <nav className="tabbar">
-          <button
-            className={`tab ${activeTab === 'Home' ? 'active' : ''}`}
-            onClick={() => setActiveTab('Home')}
-          >
-            Home
-          </button>
-          <button
-            className={`tab ${activeTab === 'About' ? 'active' : ''}`}
-            onClick={() => setActiveTab('About')}
-          >
-            About
-          </button>
-          <button
-            className={`tab ${activeTab === 'MovieRecommendations' ? 'active' : ''}`}
-            onClick={() => setActiveTab('MovieRecommendations')}
-          >
-            Movie Recommendations
-          </button>
-          <button
-            className={`tab ${activeTab === 'Contact' ? 'active' : ''}`}
-            onClick={() => setActiveTab('Contact')}
-          >
-            Contact
-          </button>
-          <button
-            className={`tab ${activeTab === 'Quiz' ? 'active' : ''}`}
-            onClick={() => setActiveTab('Quiz')}
-          >
-            Quiz
-          </button>
-          <button
-            className={`tab ${activeTab === 'MovieReview' ? 'active' : ''}`}
-            onClick={() => setActiveTab('MovieReview')}
-          >
-            Movie Review
-          </button>
-          <button 
-            className={`tab ${activeTab === 'MyAccount' ? 'active' : ''}`}
-            onClick={() => setActiveTab('MyAccount')}>
-              My Account
-          </button>
-          <button 
-            className={`tab ${activeTab === 'SubscriptionManager' ? 'active' : ''}`}
-            onClick={() => setActiveTab('SubscriptionManager')}>
-              Subscription Manager
-          </button>
-        </nav>
-        <main className="content">{renderContent()}</main>
-      </div>
-    </BrowserRouter> 
+    <nav className="tabbar">
+      {tabs.map((tab) => (
+        <button
+          key={tab.path}
+          className="tab"
+          onClick={() => navigate(tab.path)}
+        >
+          {tab.name}
+        </button>
+      ))}
+    </nav>
   );
 };
 

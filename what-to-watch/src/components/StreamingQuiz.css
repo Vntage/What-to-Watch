@@ -1,29 +1,60 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #ffffff;
     margin: 0;
     padding: 20px;
 }
 
 .quiz-content {
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
 }
 
 .quiz-content h1 {
+    text-align: center;
+    color: var(--primary-text);
     font-size: 2em;
-    margin-bottom: 15px;
+    margin-bottom: 15px
 }
 
 .quiz-content h3 {
     font-size: 1.2em;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .quiz-content input[type='radio'] {
-    margin-right: 8px;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    margin: 0 10px 0 0;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    background: #fff;
+    outline: none;
+ }
+
+.quiz-content input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px 0 0;
+    accent-color: #ddd;
+}
+
+.quiz-content input[type='radio']:checked {
+    background-color: var(--button-bg);
+}
+
+.quiz-content input[type='checkbox']:checked {
+    accent-color: var(--button-bg);
+}
+
+.quiz-content input[type='radio']:checked + label,
+.quiz-content input[type='checkbox']:checked + label {
+    color: var(--button-bg);
 }
 
 .quiz-content label {
@@ -75,12 +106,29 @@ body {
     margin-top: 20px;
 }
 
-.quiz-content .slider {
+.slider {
     width: 100%;
-    height: 10px;
-    background: #ddd;
-    border-radius: 5px;
-    cursor: pointer;
+    height: max-content;
+    appearance: none;
+    border: none;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-runnable-track {
+    background-color: #ddd;
+    height: 5px;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    background-color: var(--button-bg);
+
+    margin-top: -7px;
+    border-radius: 50%;
+    border: 1px solid vr(--button-hover-bg);
 }
 
 .quiz-content .button-container {
@@ -89,18 +137,22 @@ body {
 }
 
 .quiz-content button {
-    background-color: #f0f0f0;
+    background-color: var(--button-bg);
     border: none;
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 .quiz-content button:hover {
-    background-color: #b3b3b3;
+    background-color: var(--button-hover-bg);
 }
 
 .checkbox-container div {
-    margin-bottom: 8px; /* Add space between checkboxes */
+    margin-bottom: 8px;
+}
+
+.checkbox-container label {
+    margin-left: 10px
 }

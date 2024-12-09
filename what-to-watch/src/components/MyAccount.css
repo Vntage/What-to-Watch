@@ -10,9 +10,15 @@
     justify-content: space-between;
 }
 
+.header-container h1 {
+    color: var(--primary-text);
+}
+
 .edit-button {
     padding: 10px 20px;
     font-size: 16px;
+    border: none;
+    border-radius: 5px;
 }
 
 .my-account-info {
@@ -28,13 +34,13 @@
 
 .input {
     border: none; 
-    border-bottom: 1px solid #ccc;
-    padding: 5px 0;
+    border-bottom: 1px solid #ccc; 
+    padding: 5px 0; 
     width: 100%; 
     font-size: 16px; 
     margin-left: 10px; 
     background: transparent; 
-    color: white;
+    color: var(--secondary-text);
     outline: none; 
 }
 
@@ -81,8 +87,8 @@
 
 .card .picture {
     height: 200px;
-    background-color: #2b2b2b;
-    color: white;
+    background-color: var(--secondary-bg);
+    color: var(--secondary-text);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,4 +110,6 @@
 .logout-button {
     padding: 10px 20px;
     font-size: 16px;   
+    border: none;
+    border-radius: 5px;
 }
