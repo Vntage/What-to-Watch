@@ -205,11 +205,11 @@ export default function App() {
       </select>
     </label>
     <p><br></br></p>
-    <Button variant="primary" onClick={() => window.location.reload()}>
+    <Button variant="primary" className="add-filters" onClick={() => window.location.reload()}>
       Add filters
     </Button>
     <p><br></br></p>
-    <Button variant="primary" onClick={() => window.location.reload()}>
+    <Button variant="primary" className="surprise-me" onClick={() => window.location.reload()}>
       Surprise Me!
     </Button>
     </div>
@@ -224,15 +224,15 @@ export default function App() {
                 <div className="recommendation">
                   <h2>Top 3 Picks Below</h2>
                   <p><br></br><br></br></p>
-                  <Button variant="primary" onClick={() => window.location.reload()}>
+                  <Button variant="primary" className="recommendation-button" onClick={() => window.location.reload()}>
                     Refresh Recommendations
                   </Button> 
                   <p><br></br><br></br></p>
-                  <Button variant="primary" onClick={() => window.location.reload()}>
+                  <Button variant="primary" className="recommendation-button" onClick={() => window.location.reload()}>
                     Retake The Quiz
                   </Button>
                   {isAdmin && (
-                    <Button variant="danger" onClick={reportWrongInfo}>
+                    <Button variant="danger" className="recommendation-button" onClick={reportWrongInfo}>
                       Report Wrong Information
                     </Button>
                   )}
@@ -261,11 +261,11 @@ export default function App() {
           <h2>Your Recommendations</h2>
             <div className='show1'>
               <h1>Movie 1</h1><br></br>
-              <Button variant="primary" onClick={() => window.location.reload()}>
+              <Button variant="primary" className="threeShows-button" onClick={() => window.location.reload()}>
                   Watch Now
               </Button> 
               <p>Recommendation: {getRecommendation()}</p>
-              <Button variant="primary" onClick={() => window.location.reload()}>
+              <Button variant="primary" className="threeShows-button" onClick={() => window.location.reload()}>
                   Save to Watch Later
               </Button>
             </div> 

@@ -5,6 +5,10 @@
     text-align: center;
     font-family: Arial, sans-serif;
   }
+
+  .movie-review-container h2 {
+    color: var(--primary-text);
+  }
   
   .review-form {
     display: flex;
@@ -16,7 +20,7 @@
   
   .form-input,
   .form-textarea {
-    width: 100%; /* Ensure both have the same width */
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -48,25 +52,28 @@
   }
   
   /* Submit button styling */
-  .submit-btn {
-    background-color: #007bff;
-    color: white;
+  .submit-button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
   }
   
-  .submit-btn:hover {
-    background-color: #0056b3;
+  .submit-button:hover {
+    background-color: var(--button-hover-bg);
   }
   
   /* Reviews section styling */
   .reviews-section {
     margin-top: 30px;
     text-align: left;
+  }
+
+  .reviews-section h3 {
+    color: var(--secondary-text);
   }
   
   .review-card {

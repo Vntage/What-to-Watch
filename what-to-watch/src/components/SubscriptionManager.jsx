@@ -80,7 +80,7 @@ const SubscriptionManager = () => {
               <td>{plan.renewal}</td>
               <td>
                 <button
-                  className="add-btn"
+                  className="add-button"
                   onClick={() => handleAddSubscription(plan)}
                 >
                   Add
@@ -112,7 +112,7 @@ const SubscriptionManager = () => {
                   <td>{sub.renewal}</td>
                   <td>
                     <button
-                      className="cancel-btn"
+                      className="cancel-button"
                       onClick={() => handleCancelSubscription(sub._id)}
                     >
                       Cancel Subscription

@@ -39,13 +39,14 @@
   
   .signup-btn {
     padding: 10px;
-    font-size: 16px;
+    font-size: 20px;
     background-color: var(--button-bg);
     color: var(--button-text);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100px;
   }
   
   .signup-btn:hover {
@@ -53,6 +54,7 @@
   }
   
   p {
+    margin-top: 10px;
     color: var(--secondary-text);
   }
   

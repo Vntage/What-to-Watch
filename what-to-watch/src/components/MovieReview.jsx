@@ -80,7 +80,7 @@ const MovieReview = () => {
             </span>
           ))}
         </div>
-        <button type="submit" className="submit-btn">
+        <button type="submit" className="submit-button">
           Submit Review
         </button>
       </form>

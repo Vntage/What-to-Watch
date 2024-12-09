@@ -1,37 +1,87 @@
+body {
+  background-color: var(--primary-bg);
+  color: var(--secondary-text);
+}
+
 .fullScreen{
-  height: auto;
-  margin:auto;
+  height: 600px;
+  margin: 0 auto;
   text-align: center;
+  width: 1200px;
 }
 
 .filters {
   width: 20%; 
-  height: 4000px;
-  background-color: #f8f5dd;
+  height: 600px;
+  background-color: #818181;
   float: left;
 }
 
+.add-filters,
+.surprise-me {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+}
+
+.add-filters:hover,
+.surprise-me:hover {
+  background-color: var(--button-hover-bg);
+  border: none;
+}
+
 .rightChunk{
-  height: 4000px;
+  height: 3000px;
   float: right;
   width: 80%; 
 }
 
-
 .quiz{
   text-align: center;
-  height:15%;
+  height: 300px;
   padding-top: 2%;
+  margin-left: 60px;
+  max-width: 800px;
+}
+
+.recommendation {
+  color: var(--secondary-text);
+}
+
+.recommendation-button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+}
+
+.recommendation-button:hover {
+  background-color: var(--button-hover-bg);
+  border: none;
+}
+
+.m-2 {
+  color: var(--button-text);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+}
+
+.m-2:hover {
+  background-color: var(--button-bg);
+  border: 1px solid var(--border-color);
 }
 
 .threeShows {
+  width: 75%;
   height: 85%;
-  color: #f8f5dd;
+  color: var(--secondary-text);
   padding-top: 5%;
 }
 
 .threeShows h2{
   text-align: center;
+  color: var(--primary-text);
 }
 
 .threeShows h1{
@@ -43,11 +93,23 @@
   padding: 30%;
 }
 
+.threeShows-button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 5px;
+}
+
+.threeShows-button:hover {
+  background-color: var(--button-hover-bg);
+  border: none;
+}
+
 .show1{
   text-align: center;
   width: 85%; 
   height: 27%;
-  background-color: #141410;
+  background-color: var(--secondary-bg);
   float: center;
   margin-left: 5%;
   margin-top: 10%;
@@ -56,7 +118,7 @@
   text-align: center;
   width: 85%; 
   height: 27%;
-  background-color: #141410;
+  background-color: var(--secondary-bg);
   float: center;
   margin-left: 5%;
   margin-top: 10%;
@@ -65,7 +127,7 @@
   text-align: center;
   width: 85%; 
   height: 27%;
-  background-color: #141410;
+  background-color: var(--secondary-bg);
   float: center;
   margin-left: 5%;
   margin-top: 10%;
