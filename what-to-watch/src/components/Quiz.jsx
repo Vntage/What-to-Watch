@@ -30,36 +30,115 @@ const StreamingQuiz = () => {
         }
     };
 
+
     const recommendStreamingService = () => {
         const services = [
-            {
+            // got data from api website
+            { 
                 name: 'Netflix',
-                genres: ['Comedy', 'Thriller', 'Drama'],
-                budgetRange: [10, 20],
-                languages: ['English', 'Spanish', 'French'],
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Mystery', 'Fantasy'],
+                budgetRange: [15, 23],
+                languages: ['English', 'Spanish', 'French', 'Hindi', 'Korean'],
                 ads: false,
+                watch : ['both','movies','tvShows']
             },
             {
                 name: 'Hulu',
-                genres: ['Comedy', 'Horror', 'Drama'],
-                budgetRange: [6, 15],
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
+                budgetRange: [5, 10],
                 languages: ['English'],
                 ads: true,
+                watch : ['both','movies','tvShows']
+            },
+            {
+                name: 'Amazon Prime',
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
+                budgetRange: [7, 15],
+                languages: ['English', 'French', 'Hindi'],
+                ads: false,
+                watch : ['both','movies','tvShows']
+            },
+            {
+                name: 'HBO Max',
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
+                budgetRange: [10, 22],
+                languages: ['English', 'French', 'Hindi'],
+                ads: false,
+                watch : ['both','movies','tvShows']
             },
             {
                 name: 'Disney+',
-                genres: ['Comedy', 'Family', 'Adventure'],
-                budgetRange: [8, 12],
+                genres: ['Comedy', 'Sci-fi', 'Animation', 'Family/Kids', 'Fantasy'],
+                budgetRange: [10, 16],
                 languages: ['English', 'French', 'Hindi'],
                 ads: false,
+                watch : 'movies'
             },
+            {
+                name: 'Apple TV',
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
+                budgetRange: [9, 11],
+                languages: ['English', 'French', 'Hindi'],
+                ads: false,
+                watch : 'movies'
+            },
+            {
+                name: 'Peacock',
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
+                budgetRange: [7, 15],
+                languages: ['English', 'French', 'Hindi'],
+                ads: true,
+                watch : 'movies'
+            },
+            {
+                name: 'Paramount+',
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation', 'Family/Kids', 'Mystery', 'Fantasy'],
+                budgetRange: [7, 13],
+                languages: ['English', 'French', 'Hindi'],
+                ads: true,
+                watch : 'movies'
+            },
+            {
+                name: 'Starz',
+                genres: ['Thriller', 'Drama', 'Mystery', 'Fantasy'],
+                budgetRange: [10, 11],
+                languages: ['English', 'French', 'Hindi'],
+                ads: true,
+                watch : 'movies'
+            },
+            {
+                name: 'Discovery+',
+                genres: [ 'Sci-fi', 'Documentary'],
+                budgetRange: [5, 9],
+                languages: ['English', 'French', 'Hindi'],
+                ads: false,
+                watch : 'both'
+            },
+            {
+                name: 'Pluto TV',
+                genres: ['Comedy','Horror','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation'],
+                budgetRange: [0],
+                languages: ['English'],
+                ads: true,
+                watch : 'both'
+            },
+            {
+                name: 'Tubi',
+                genres: ['Comedy','Horror', 'Thriller','Action', 'Romance', 'Sci-fi', 'Drama', 'Documentary', 'Animation'],
+                budgetRange: [0],
+                languages: ['English'],
+                ads: true,
+                watch : 'both'
+            }
         ];
     
         const filteredServices = services.filter(
             (service) =>
                 budget >= service.budgetRange[0] &&
                 budget <= service.budgetRange[1] &&
-                (adsPreference === 'yesAds' ? service.ads : !service.ads)
+                (adsPreference === 'yesAds' ? service.ads : !service.ads)&&
+                (watchPreference === 'both' ? service.watchPreference : !service.watchPreference)
+
         );
     
         let bestMatch = null;
@@ -82,10 +161,10 @@ const StreamingQuiz = () => {
     
         if (!bestMatch) {
             bestMatch = {
-                name: filteredServices.length > 0 ? filteredServices[0].name : 'Netflix',
+                name: filteredServices.length > 0 ? filteredServices[0].name : 'Tubi',
                 reason: filteredServices.length > 0
                     ? `${filteredServices[0].name} fits your budget and ad preferences, offering a diverse library.`
-                    : 'Netflix is a diverse option that fits many preferences.',
+                    : 'Tubi is a free and diverse option that fits many preferences.',
             };
         }
     
@@ -200,7 +279,7 @@ const StreamingQuiz = () => {
                 <input
                     type="range"
                     min="0"
-                    max="30"
+                    max="25"
                     value={budget}
                     onChange={handleBudgetChange}
                     className="slider"
