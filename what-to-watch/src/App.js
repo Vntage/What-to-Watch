@@ -16,10 +16,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar />
+        <NavBar /> {/* Navbar will be hidden on login/signup pages */}
         <main className="content">
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Login />} /> {/* Default route */}
             <Route path="/Login" element={<Login />} />
             <Route path="/SignUp" element={<SignUp />} />
             <Route path="/Home" element={<Home />} />
@@ -28,8 +28,8 @@ const App = () => {
             <Route path="/Quiz" element={<Quiz />} />
             <Route path="/MovieRecommendations" element={<MovieRecommendations />} />
             <Route path="/MovieReview" element={<MovieReview />} />
+            <Route path="/SubscriptionManager" element={<SubscriptionManager />} />
             <Route path="/MyAccount" element={<MyAccount />} />
-            <Route path ="/SubscriptionManager" element={<SubscriptionManager />} />
           </Routes>
         </main>
       </div>
@@ -41,21 +41,22 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const hideNavBar = location.pathname === '/Login' || location.pathname === '/SignUp';
+  // Hide the navbar when on Login or SignUp page
+  const hideNavBar = location.pathname === '/Login' || location.pathname === '/SignUp' || location.pathname === '/';
 
-  if(hideNavBar) {
-    return null;
+  if (hideNavBar) {
+    return null;  // Do not render the navbar
   }
 
   const tabs = [
     { name: 'Home', path: '/Home' },
     { name: 'About', path: '/About' },
-    { name: 'Movie Recommendations', path: '/MovieRecommendations' },
-    { name: 'Contact', path: '/Contact' },
     { name: 'Quiz', path: '/Quiz' },
+    { name: 'Movie Recommendations', path: '/MovieRecommendations' },
+    { name: 'Manage Subscriptions', path: '/SubscriptionManager' },
     { name: 'Movie Review', path: '/MovieReview' },
+    { name: 'Contact', path: '/Contact' },
     { name: 'My Account', path: '/MyAccount' },
-    { name: 'Manage Subscriptions', path: '/SubscriptionManager'}
   ];
 
   return (
