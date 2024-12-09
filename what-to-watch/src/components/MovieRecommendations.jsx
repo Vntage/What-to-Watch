@@ -1,66 +1,44 @@
-import React,{useEffect, useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import {Container, Row, Col,Button} from "react-bootstrap";
 import './movie.css';
+import * as streamingAvailability from "../index";
 
 export default function App() {
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0); 
   const [showResults, setShowResults] = useState(false); 
-  const [score, setScore] = useState(0); 
-  const [isAdmin,setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const userRole = localStorage.getItem("userRole");
-    if (userRole === "admin") {
-      setIsAdmin(true);
-    }
-  }, []);
 
   const questions = [
     {
       id:1,
       question: 'What Streaming Service?',
-      answerOptions: [
-        {answerText: 'Netflix',isCorrect: true },
-        {answerText: 'Hulu',isCorrect: true },
-        {answerText: 'HBOMax',isCorrect: true },
-        {answerText: 'Disney+',isCorrect: true }],
+      answerOptions: ['netflix','hulu','hbo','disney'],
     },
     {
       id: 2,
       question: 'Movie or TV Show?',
-      answerOptions: [
-        {answerText: 'Movie', isCorrect: true },
-        {answerText: 'TV Show', isCorrect: false },
-      ],
+      answerOptions: ['movie','series'],
     },
     {
       id: 3,
       question: 'What Movie Genre?',
-      answerOptions: [
-        {answerText: 'Action',isCorrect: true },
-        {answerText: 'Drama',isCorrect: true },
-        {answerText: 'SciFi',isCorrect: true },
-        {answerText: 'Horror',isCorrect: true },
-        {answerText: 'Comedy',isCorrect: true },
-        {answerText: 'Family',isCorrect: true }
-      ],
+      answerOptions: ['action','drama','horror','comedy','family', 'documentary']
+    },
+    {
+      id: 4,
+      question: 'How many Recommendations (max 6)',
+      answerOptions: [1, 2, 3, 4, 5, 6],
     }
   ];
 
-  const handleAnswerClick = (isCorrect, answerText) => {
+  const handleAnswerClick = (answerText) => {
     // Update answers state
-    setAnswers((prev) => ({
-      ...prev,
-      [questions[currentQuestion].id]: answerText,
-    }));
-
-    // Update score if the answer is correct
-    if (isCorrect) {
-      setScore((prevScore) => prevScore + 1);
-    }
-
+    setAnswers((prev) => {
+      const newAnswers = [...prev];
+      newAnswers[currentQuestion] = answerText; // Update the specific index
+      return newAnswers;
+    });
     // Move to the next question or show results
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
@@ -70,30 +48,15 @@ export default function App() {
     }
   };
 
-  const getRecommendation = () => {
-    const streamingService = answers[1];
-    const genre = answers[3] || answers[4]; // Movie or TV genre based on the answer
-
-    // example until API works
-    if (streamingService === 'Netflix' && genre === 'Action') {
-      return 'Check out "Extraction" on Netflix.';
-    } else if (streamingService === 'Disney+' && genre === 'Family') {
-      return 'You might enjoy "Encanto" on Disney+.';
-    }
-    return 'No recommendation found, please try again with different filters.';
-  };
-
   const [checkedItems, setCheckedItems] = useState({});
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setCheckedItems({ ...checkedItems, [name]: checked });
   };
-
-  const reportWrongInfo = () => {
-    alert("The information has been reported as incorrect.")
-    // add api request here
-  }
+  useEffect(() => {
+    console.log('Updated Answers:', answers); // Log updated answers
+  }, [answers]);
 
   return (
     <div className="fullScreen">
@@ -205,13 +168,10 @@ export default function App() {
       </select>
     </label>
     <p><br></br></p>
-    <Button variant="primary" className="add-filters" onClick={() => window.location.reload()}>
+    <Button variant="primary" onClick={() => window.location.reload()}>
       Add filters
     </Button>
     <p><br></br></p>
-    <Button variant="primary" className="surprise-me" onClick={() => window.location.reload()}>
-      Surprise Me!
-    </Button>
     </div>
 
       <div className="rightChunk">
@@ -223,19 +183,11 @@ export default function App() {
               {showResults ? (
                 <div className="recommendation">
                   <h2>Top 3 Picks Below</h2>
+                  <p><br></br><br></br></p> 
                   <p><br></br><br></br></p>
-                  <Button variant="primary" className="recommendation-button" onClick={() => window.location.reload()}>
-                    Refresh Recommendations
-                  </Button> 
-                  <p><br></br><br></br></p>
-                  <Button variant="primary" className="recommendation-button" onClick={() => window.location.reload()}>
+                  <Button variant="primary" onClick={() => window.location.reload()}>
                     Retake The Quiz
                   </Button>
-                  {isAdmin && (
-                    <Button variant="danger" className="recommendation-button" onClick={reportWrongInfo}>
-                      Report Wrong Information
-                    </Button>
-                  )}
                 </div>
               ) : (
                 <div className ="quiz">
@@ -243,12 +195,12 @@ export default function App() {
                   <div className="answer-options">
                     {questions[currentQuestion].answerOptions.map((option) => (
                       <Button
-                        key={option.answerText}
+                        key={option}
                         className="m-2"
                         variant="outline-primary"
-                        onClick={() => handleAnswerClick(option.isCorrect, option.answerText)}
+                        onClick={() => handleAnswerClick(option)}
                       >
-                        {option.answerText}
+                        {option}
                       </Button>
                     ))}
                   </div>
@@ -258,27 +210,62 @@ export default function App() {
           </Row>
         </Container> </div>
         <div className='threeShows'>
+          
           <h2>Your Recommendations</h2>
-            <div className='show1'>
-              <h1>Movie 1</h1><br></br>
-              <Button variant="primary" className="threeShows-button" onClick={() => window.location.reload()}>
-                  Watch Now
-              </Button> 
-              <p>Recommendation: {getRecommendation()}</p>
-              <Button variant="primary" className="threeShows-button" onClick={() => window.location.reload()}>
-                  Save to Watch Later
-              </Button>
-            </div> 
-            
-            <div className='show2'>
-            <h1>Movie 2</h1><br></br>
-              <h6>2</h6>
-            </div> 
-            <div className='show3'>
-            <h1>Movie 3</h1><br></br>
-              <h6>3</h6>
-            </div> 
-        </div>
+              <div>
+                <ol>
+                {streamingAvailability.searchResult.shows.filter((show) => {
+                  const isShowTypeMatch = show.showType === answers[1];
+                  const isGenre = show.genres.some((genre) => genre.id === answers[2]);
+                  return isShowTypeMatch && isGenre;
+                 }) 
+                  .slice(0,answers[3]).map((show,index) => (
+                  <li key={show.title}>
+                    <img
+                    src={show.imageSet.horizontalPoster.w1440 || 'https://via.placeholder.com/150'} // Fallback placeholder
+                    alt={`${show.title} poster`}
+                    style={{
+                    width: '500px', // Set image width
+                    height: 'auto', // Maintain aspect ratio
+                    marginBottom: '10px',
+                    }}/> <br></br>
+                    {`Movie ${index + 1}: ${show.title}`}
+                    <br></br>
+                    <a
+                      href={show.streamingOptions.us[0].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        textDecoration: 'none', // Removes underline from the link
+                      }}
+                    >
+                    <Button variant="primary" onClick={() => show.streamingOptions.us.at(0).link}>
+                      Watch Now
+                    </Button> </a>
+                    <br></br>
+                    {`Overview: ${show.overview}`}
+                    <br></br>
+                    {`Overview: ${show.showType}`}
+                    <br></br>
+                    {`Directors: ${show.directors}`}
+                    <br></br>
+                    {`Release Year: ${show.releaseYear}`}
+                    <br></br>
+                    {`Genres: ${show.genres ? show.genres.map((genre) => genre.name).join(', ') : 'N/A'}`}
+                    <br></br>
+                    {`Cast: ${show.cast}`}
+                    <br></br>
+                    {`Rating: ${show.rating}`}
+                    <br></br>
+                    <Button variant="primary" onClick={() => window.location.reload()}>
+                        Save to Watch Later
+                    </Button> <br></br><br></br><br></br>
+                  </li>
+                  ))}
+                </ol>
+                {console.log(answers)};
+            </div>
+        </div> 
       </div>
     </div>
   );
