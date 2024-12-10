@@ -136,8 +136,8 @@ const StreamingQuiz = () => {
             (service) =>
                 budget >= service.budgetRange[0] &&
                 budget <= service.budgetRange[1] &&
-                (adsPreference === 'yesAds' ? service.ads : !service.ads)&&
-                (watchPreference === 'both' ? service.watchPreference : !service.watchPreference)
+                (adsPreference === 'yesAds' ? service.ads === true : service.ads === false) &&
+                service.watch.includes(watchPreference)
 
         );
     
