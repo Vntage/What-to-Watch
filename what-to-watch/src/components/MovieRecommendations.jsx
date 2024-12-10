@@ -262,18 +262,15 @@ export default function App() {
                       }} /><br />
                     {`Movie ${index + 1}: ${show.title}`}
                     <br />
-                    <a
-                      href={show.streamingOptions.us[0].link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        textDecoration: 'none',
-                      }}
-                    >
-                      <Button variant="primary" onClick={() => window.open(show.streamingOptions.us[0].link, '_blank')}>
+                    <a href={show.streamingOptions.us[0].link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none' }}>
+                    <Button variant="primary">
                         Watch Now
-                      </Button>
+                    </Button>
                     </a>
+
                     <br />
                     {`Overview: ${show.overview}`}
                     <br />
