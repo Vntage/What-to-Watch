@@ -33,7 +33,7 @@ export default function App() {
     {
       id: 4,
       question: 'How many Recommendations (max 6)',
-      answerOptions: [1, 2, 3, 4, 5, 6],
+      answerOptions: [1, 3, 6, 9, 12, 1],
     }
   ];
 
