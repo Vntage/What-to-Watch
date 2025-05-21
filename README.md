@@ -13,3 +13,6 @@ What-To-Watch is a smart, user-friendly movie recommendation platform that helps
     🔐 User Authentication (Sign up/Login)
 
     🎯 Search and Filtering by genre, year, rating, and more
+
+
+Project Built for ICSI 418, Software Engineering. University at Albany.
